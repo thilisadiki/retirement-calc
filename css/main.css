@@ -1,0 +1,339 @@
+/* --- CSS Variables for Neumorphism Theme --- */
+:root {
+    --primary-color: #5b69d4; /* A muted blue/purple for accents */
+    --primary-hover: #4a56b1;
+    --bg-color: #e4e9f2;
+    --text-color: #33394b;
+    --text-muted: #848b9f;
+
+    /* Neumorphism Shadows */
+    --light-shadow: #ffffff;
+    --dark-shadow: #c8d0e0;
+    
+    /* Convex/Extruded style for cards and buttons */
+    --shadow-convex: 8px 8px 16px var(--dark-shadow), -8px -8px 16px var(--light-shadow);
+    
+    /* Concave/Pressed-in style for inputs and active states */
+    --shadow-concave: inset 6px 6px 12px var(--dark-shadow), inset -6px -6px 12px var(--light-shadow);
+}
+
+/* --- Base Styles & Font --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.container {
+    width: 100%;
+    max-width: 700px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-weight: 600;
+    color: var(--text-color);
+    text-shadow: 1px 1px 2px var(--light-shadow);
+}
+
+/* --- Card Layout --- */
+.card {
+    background-color: var(--bg-color);
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow-convex);
+    transition: all 0.3s ease-in-out;
+}
+
+/* --- Form Grid & Input Styling --- */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group.full-width {
+    grid-column: 1 / -1;
+}
+
+label {
+    margin-bottom: 0.5rem;
+    font-weight: 400;
+    color: var(--text-muted);
+}
+
+input, select {
+    width: 100%;
+    padding: 1rem;
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 12px;
+    color: var(--text-color);
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    box-shadow: var(--shadow-concave);
+}
+
+input:focus, select:focus {
+    outline: none;
+    box-shadow: var(--shadow-concave), 0 0 0 2px var(--primary-color);
+}
+
+/* Range Slider */
+.range-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+    box-shadow: none; /* Override default input style */
+}
+input[type="range"]::-webkit-slider-runnable-track {
+    background: var(--bg-color);
+    height: 0.75rem;
+    border-radius: 1rem;
+    box-shadow: var(--shadow-concave);
+}
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    margin-top: -6px; /* Centers thumb on the track */
+    background-color: var(--primary-color);
+    height: 1.5rem;
+    width: 1.5rem;
+    border-radius: 50%;
+    box-shadow: var(--shadow-convex);
+}
+
+#rate-value {
+    font-weight: 600;
+    color: var(--primary-color);
+    min-width: 50px;
+}
+
+/* --- Button --- */
+.calculate-btn {
+    width: 100%;
+    padding: 1rem;
+    margin-top: 2rem;
+    border: none;
+    border-radius: 12px;
+    background-color: var(--primary-color);
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: var(--shadow-convex);
+    transition: all 0.2s ease;
+}
+.calculate-btn:hover {
+    background-color: var(--primary-hover);
+}
+.calculate-btn:active {
+    box-shadow: var(--shadow-concave);
+    transform: translateY(2px);
+}
+/* --- Results Card --- */
+.results-card {
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+.results-card:not([hidden]) {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.results-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.result-item h3 {
+    color: var(--text-muted);
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+}
+
+.result-item p {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.summary {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+}
+
+.summary.success { color: #2e7d32; }
+.summary.shortfall { color: #c62828; }
+
+/* --- Info Icon & Tooltip --- */
+.result-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+.info-icon {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background-color: var(--bg-color);
+    color: var(--text-muted);
+    text-align: center;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 18px;
+    cursor: help;
+    position: relative;
+    box-shadow: var(--shadow-convex);
+}
+.info-icon::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 150%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--bg-color);
+    box-shadow: var(--shadow-convex);
+    color: var(--text-color);
+    padding: 0.75rem;
+    border-radius: 8px;
+    width: 280px;
+    text-align: left;
+    font-size: 0.9rem;
+    font-weight: 400;
+    line-height: 1.4;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 10;
+}
+.info-icon:hover::after {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* --- Chart --- */
+.chart-container {
+    position: relative;
+    height: 250px;
+    width: 100%;
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 600px) {
+    .form-grid, .results-grid {
+        grid-template-columns: 1fr;
+    }
+    h1 { font-size: 1.8rem; }
+    .card { padding: 1.5rem; }
+}
+
+/* --- New Two-Column Layout --- */
+.main-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2.5rem;
+    align-items: start;
+    width: 100%;
+    max-width: 1200px; /* Wider max-width for the new layout */
+    margin: 0 auto;
+}
+
+.calculator-wrapper {
+    max-width: 700px; /* Retain max-width for the calculator itself */
+}
+
+/* --- Content & FAQ Styling --- */
+.content-wrapper h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+.content-wrapper .faq-title {
+    margin-top: 2rem;
+}
+
+.content-wrapper p {
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+/* Styling for the FAQ Accordion */
+details {
+    margin-bottom: 1rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow-concave);
+    padding: 1rem;
+}
+
+summary {
+    font-weight: 600;
+    color: var(--primary-color);
+    cursor: pointer;
+    list-style: none; /* Removes the default triangle */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+summary::-webkit-details-marker {
+    display: none; /* Also removes the default triangle */
+}
+
+/* Custom animated arrow for the FAQ */
+summary::after {
+    content: '+';
+    font-size: 1.5rem;
+    font-weight: 400;
+    transition: transform 0.3s ease;
+}
+
+details[open] summary::after {
+    content: '−'; /* A minus sign for open state */
+    transform: rotate(180deg);
+}
+
+details[open] p {
+    margin-top: 1rem; /* Add some space when the answer is revealed */
+}
+
+/* --- Responsive Media Query for the new layout --- */
+@media (max-width: 992px) {
+    .main-layout {
+        grid-template-columns: 1fr; /* Stack columns on smaller screens */
+    }
+    .calculator-wrapper {
+        max-width: 100%;
+    }
+}

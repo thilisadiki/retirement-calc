@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Retirement Calculator</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/main.css">
+
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://your-website-url.com/">
+        <meta property="og:title" content="Retirement Calculator | Are You on Track for Your Future?">
+        <meta property="og:description" content="Use this free, interactive Neumorphism-style calculator to project your retirement savings and see if you're on track to meet your financial goals.">
+        <meta property="og:image" content="https://your-website-url.com/social-share-image.jpg">
+
+        <meta property="twitter:card" content="summary_large_image">
+        <meta property="twitter:url" content="https://your-website-url.com/">
+        <meta property="twitter:title" content="Retirement Calculator | Are You on Track for Your Future?">
+        <meta property="twitter:description" content="Use this free, interactive Neumorphism-style calculator to project your retirement savings and see if you're on track to meet your financial goals.">
+        <meta property="twitter:image" content="https://your-website-url.com/social-share-image.jpg">
+    </head>
+<body>
+    <div class="main-layout">
+        <main class="calculator-wrapper">
+            <h1>Retirement Calculator</h1>
+            <div class="card input-card">
+                <form id="retirement-form">
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <label for="current-age">Current Age</label>
+                            <input type="number" id="current-age" value="30" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="retirement-age">Retirement Age</label>
+                            <input type="number" id="retirement-age" value="65" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="current-savings">Current Savings</label>
+                            <input type="number" id="current-savings" value="50000" step="1000" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="monthly-contribution">Monthly Contribution</label>
+                            <input type="number" id="monthly-contribution" value="1500" step="100" required>
+                        </div>
+                        <div class="input-group full-width">
+                            <label for="rate-of-return">Annual Rate of Return (%)</label>
+                            <div class="range-container">
+                                <input type="range" id="rate-of-return" min="1" max="15" value="7" step="0.5">
+                                <span id="rate-value">7%</span>
+                            </div>
+                        </div>
+                         <div class="input-group">
+                            <label for="desired-income">Desired Annual Income</label>
+                            <input type="number" id="desired-income" value="300000" step="10000" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="currency">Currency</label>
+                            <select id="currency" name="currency">
+                                <option value="ZAR" selected>ZAR (R)</option>
+                                <option value="USD">USD ($)</option>
+                                <option value="EUR">EUR (€)</option>
+                                <option value="GBP">GBP (£)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="calculate-btn">Calculate</button>
+                </form>
+            </div>
+
+            <div class="card results-card" id="results-container" hidden>
+                <h2>Your Retirement Outlook</h2>
+                <div class="results-grid">
+                    <div class="result-item">
+                        <h3>Projected Savings</h3>
+                        <p id="projected-value">R0</p>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">
+                            <h3>Target Needed</h3>
+                            <span class="info-icon" data-tooltip="This is calculated using the 4% Rule (Your Desired Annual Income ÷ 0.04). It's the estimated portfolio size needed to safely withdraw your desired income each year in retirement.">i</span>
+                        </div>
+                        <p id="target-value">R0</p>
+                    </div>
+                </div>
+                <p id="summary-message" class="summary"></p>
+                <div class="chart-container">
+                    <canvas id="results-chart"></canvas>
+                </div>
+            </div>
+            <h2 class="faq-title">Frequently Asked Questions</h2>
+
+                <details>
+                    <summary>What is a realistic rate of return?</summary>
+                    <p>This depends on your investment strategy. A conservative portfolio might average 4-6%, while a more aggressive portfolio with higher exposure to equities (like the JSE All Share Index) could aim for 8-10% or more over the long term, but with higher risk.</p>
+                </details>
+
+                <details>
+                    <summary>Does this calculator include inflation?</summary>
+                    <p>No, this is a simplified calculator. To account for inflation, you should use a "real rate of return" (your expected return minus the inflation rate). For example, if you expect a 9% return and inflation is 5%, your real return is 4%.</p>
+                </details>
+
+                <details>
+                    <summary>What about tax on my retirement savings?</summary>
+                    <p>This calculator does not account for tax. In South Africa, contributions to approved retirement funds like a Retirement Annuity (RA) are often tax-deductible up to certain limits, allowing your investment to grow tax-free. Tax is then payable upon withdrawal at retirement.</p>
+                </details>
+                <details>
+                <summary>Is 4 million rand enough to retire?</summary>
+                <p>It depends entirely on your lifestyle. Using the 4% Rule, a R4 million portfolio would provide an annual income of roughly R160,000 (R13,333 per month before tax). For some, this is sufficient. For others, it may not cover all expenses like medical aid and housing. Use your personal monthly budget as the ultimate guide.</p>
+                </details>
+
+            <details>
+                <summary>What is the 7% rule for retirement?</summary>
+                <p>The 7% rule is a more aggressive withdrawal strategy compared to the standard 4% rule. It suggests withdrawing 7% of your portfolio's value each year. While this provides a higher income, it carries a significantly higher risk of depleting your capital too soon, especially if the market experiences a downturn early in your retirement.</p>
+            </details>
+
+            <details>
+                <summary>How much money do I need to retire at 55 in South Africa?</summary>
+                <p>There's no single number, as it's tied to your annual expenses. The key challenge with retiring at 55 is that your savings need to last much longer (potentially 35+ years). A common method is to multiply your desired annual income by 25 (the 4% rule). For example, if you need R40,000 per month (R480,000 per year), you'd need a target of approximately R12 million.</p>
+            </details>
+
+            <details>
+                <summary>What is the 3 rule in a retirement calculator?</summary>
+                <p>While there isn't a standard "3 Rule," this might refer to the "Rule of 300." This is another way of expressing the 4% rule: simply take your desired <strong>monthly</strong> retirement income and multiply it by 300 to get a quick estimate of the total capital you need. For example, R30,000 per month x 300 = R9 million target.</p>
+            </details>
+        </main>
+
+        <aside class="content-wrapper">
+            <div class="card">
+                <h2>Understanding Your Results</h2>
+                <p>Planning for retirement is a journey, and this calculator is your first step. The projection is powered by the principle of **compound interest**, where your investment earnings start generating their own earnings. The earlier you start, the more powerful this effect becomes.</p>
+                <p>Your "Target Needed" is based on the **4% Rule**, a guideline suggesting you can safely withdraw 4% of your total savings each year in retirement without depleting your funds too quickly.</p>
+                <h3 class="content-subtitle">Key Retirement Terms Explained</h3>
+                <p>Navigating retirement in South Africa involves some specific terms:</p>
+                <ul>
+                    <li><strong>Retirement Annuity (RA):</strong> A private pension plan that offers significant tax benefits on your contributions, helping your savings grow faster.</li>
+                    <li><strong>Preservation Fund:</strong> A special fund to house your retirement savings from a previous employer's pension or provident fund when you change jobs, keeping it preserved for retirement.</li>
+                    <li><strong>Living vs. Life Annuity:</strong> At retirement, you must use at least two-thirds of your savings to buy an annuity. A **Life Annuity** provides a guaranteed income for life, while a **Living Annuity** keeps your money invested, allowing you to draw a flexible income (between 2.5% and 17.5% per year).</li>
+                </ul>
+
+                <h3 class="content-subtitle">Your Next Steps</h3>
+                <p>This calculator provides a snapshot. Here’s what to do with the information:</p>
+                <ol>
+                    <li><strong>Refine Your Budget:</strong> Get a clear picture of your current expenses to accurately estimate your retirement income needs.</li>
+                    <li><strong>Review Your Strategy:</strong> Check if your current investment strategy and risk profile align with the rate of return you've selected.</li>
+                    <li><strong>Consult an Advisor:</strong> Use these results as a starting point for a conversation with a certified financial advisor who can provide personalised advice.</li>
+                </ol>
+            </div>
+        </aside>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/main.js" type="module" defer></script>
+</body>
+</html>
