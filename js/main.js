@@ -19,25 +19,28 @@ const runCalculationAndUpdateUI = () => {
     const currentSavings = parseFloat(document.getElementById('current-savings').value);
     const monthlyContribution = parseFloat(document.getElementById('monthly-contribution').value);
     const annualRate = parseFloat(rateOfReturnInput.value);
-    const desiredIncome = parseFloat(document.getElementById('desired-income').value);
     const currency = document.getElementById('currency').value;
 
+    // --- LOGIC CHANGE HERE ---
+    // Get the retirement goal directly from the user's input
+    const targetNestEgg = parseFloat(document.getElementById('target-goal').value); 
+    // The old calculation (desiredIncome / 0.04) is now removed.
+
     // 2. Validate inputs
-    if (isNaN(currentAge) || isNaN(retirementAge) || retirementAge <= currentAge) {
+    if (isNaN(currentAge) || isNaN(retirementAge) || isNaN(targetNestEgg) || retirementAge <= currentAge) {
         if (event.type === 'submit') {
-            alert("Please provide valid ages.");
+            alert("Please provide valid ages and a valid retirement goal.");
         }
         return;
     }
 
-    // 3. Perform calculations
+    // 3. Perform projection calculation
     const yearsToRetirement = retirementAge - currentAge;
     const n = yearsToRetirement * 12;
     const r = (annualRate / 100) / 12;
     const projectedNestEgg = calculateFutureValue(currentSavings, monthlyContribution, r, n);
-    const targetNestEgg = desiredIncome / 0.04;
 
-    // 4. Update UI
+    // 4. Update UI with the projection and the user-defined target
     updateResultsText(projectedNestEgg, targetNestEgg, currency);
     renderChart(projectedNestEgg, targetNestEgg);
     resultsContainer.hidden = false;
